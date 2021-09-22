@@ -9,13 +9,13 @@ public class Arvore{
 			Numero direita = null;
 			Numero esquerda = null;
 			Numero pai = null;
-			for(Numero i : ArvoreBinaria ) { // encontrar as filhas
+			for(Numero i : ArvoreBinaria ) {
 				if(i.getValor() == num) {
 					direita = i.getDireita();
 					esquerda = i.getEsquerda();
 				}
 			}
-			for(Numero i : ArvoreBinaria ) { // encontrar o pai
+			for(Numero i : ArvoreBinaria ) {
 				if(i.getDireita() != null) {
 					if(i.getDireita().getValor() == num) {
 						pai = i;
@@ -27,12 +27,12 @@ public class Arvore{
 					}
 				}
 			}
-			String direitaString = (direita != null)? "O filho da direita È: " + direita.getValor() : "Esse n˙mero n„o tem filho na direita";
-			String esquerdaString = (esquerda != null)? "O filho da esquerda È: " + esquerda.getValor() : "Esse n˙mero n„o tem filho na esquerda";
-			String paiString = (pai != null)? "O pai È: " + pai.getValor() : "Esse n˙mero È a raiz da ·rvore";
+			String direitaString = (direita != null)? "O filho da direita √©: " + direita.getValor() : "Esse n√∫mero n√£o tem filho na direita";
+			String esquerdaString = (esquerda != null)? "O filho da esquerda √©: " + esquerda.getValor() : "Esse n√∫mero n√£o tem filho na esquerda";
+			String paiString = (pai != null)? "O pai √©: " + pai.getValor() : "Esse n√∫mero √© a raiz da √°rvore";
 			System.out.printf("%s.%n%s.%n%s.%n",direitaString,esquerdaString,paiString);
 		}else {
-			System.out.println("Esse valor n„o existe na ·rvore");
+			System.out.println("Esse valor n√£o existe na √°rvore");
 		}
 		
 	}
@@ -53,19 +53,19 @@ public class Arvore{
 		if(bool2 == false) {
 			Numero numero = new Numero(num);
 
-			Numero recursivo = ArvoreBinaria.get(0); // ·rvore root
+			Numero recursivo = ArvoreBinaria.get(0); // √°rvore root
 			
 			while(true) {
 				
 				if(numero.getValor() > recursivo.getValor()) { // caso o valor a ser adicionado for maior que o recursivo
-					if(recursivo.getDireita() == null) { // caso o recursivo n„o tenha filho na direita
+					if(recursivo.getDireita() == null) { // caso o recursivo n√£o tenha filho na direita
 						recursivo.setDireita(numero);
 						break;
 					}else { // caso o recursivo tenha filho na direita
 						recursivo = recursivo.getDireita();
 					}
 				}else { // caso o valor a ser adicionado for menor que o recursivo
-					if(recursivo.getEsquerda() == null) { // caso o recursivo n„o tenha filho na esquerda
+					if(recursivo.getEsquerda() == null) { // caso o recursivo n√£o tenha filho na esquerda
 						recursivo.setEsquerda(numero);
 						break;
 					}else { // caso o recursivo tenha filho na esquerda
@@ -135,19 +135,24 @@ public class Arvore{
 						int ind = ArvoreBinaria.indexOf(i);
 						erase = ArvoreBinaria.get(ind);
 					
-					}else { // caso 3: dois filhos - filho a direita tem filho a esquerda
+					}else { // caso 3: dois filhos 
 						
-						if(i.getDireita().getEsquerda() == null) { // filho a direita n„o tem filho a esquerda
+						if(i.getDireita().getEsquerda() == null) { // filho a direita n√£o tem filho a esquerda
 							if(i.getValor() == root.getValor()) {
 								ArvoreBinaria.add(0,i.getDireita());
 							}else {
-								pai.setDireita(i.getDireita());
+								if(direita) {
+									pai.setDireita(i.getDireita());
+								}else {
+									pai.setEsquerda(i.getDireita());
+								}
+								
 							}
 							i.getDireita().setEsquerda(i.getEsquerda());
 							int ind = ArvoreBinaria.indexOf(i);
 							erase = ArvoreBinaria.get(ind);
 						
-						}else {
+						}else { // filho a direita tem filho a esquerda
 						
 						
 							Numero substituto = i.getDireita().getEsquerda();
@@ -174,10 +179,15 @@ public class Arvore{
 							if(i.getValor() == root.getValor()) {
 								ArvoreBinaria.add(0,substituto);
 							}else {
-								pai.setDireita(substituto); // substituir filho a direita de pai de i por substituto
+								if(direita) {
+									pai.setDireita(substituto);
+								}else {
+									pai.setEsquerda(substituto);
+								}
+								
 							}
 							int ind = ArvoreBinaria.indexOf(i);
-							erase = ArvoreBinaria.get(ind);// remover i
+							erase = ArvoreBinaria.get(ind);
 						}
 					}
 				}
@@ -186,69 +196,15 @@ public class Arvore{
 		return bool;
 	}
 	
-	public void PrintList() {
-		Numero rootAtual = ArvoreBinaria.get(0);
-		Numero recursivo = rootAtual;
-		ArrayList<Numero> FilhosEsquerda = new ArrayList<Numero>();
-		ArrayList<Numero> FilhosDireita = new ArrayList<Numero>();
-		ArrayList<Numero> Temporarios = new ArrayList<Numero>();
-		FilhosEsquerda.add(recursivo);
-		
-		if(recursivo.getEsquerda() != null) {
-			while(true) { // enquanto a raiz tiver filho a esquerda
-				if(recursivo.getEsquerda() == null) {break;}
-				recursivo = recursivo.getEsquerda();
-				if(recursivo.getDireita() != null) { // caso o nÛ interno tenha um ou mais filhos a direita
-					Numero temporario = recursivo;
-					while(temporario.getDireita() != null) {
-						
-						temporario = temporario.getDireita();
-						FilhosEsquerda.add(temporario);
-					}
-					FilhosEsquerda.add(recursivo);
-				}else if(recursivo.getEsquerda() == null) {
-					FilhosEsquerda.add(recursivo);
-					break;
-				}else {
-					FilhosEsquerda.add(recursivo);
-				}
-			}
-		}
-		recursivo = rootAtual;
-		if(recursivo.getDireita() != null) {
-			while(true) { // enquanto a raiz tiver filho a direita
-				if(recursivo.getDireita() == null) {break;}
-				recursivo = recursivo.getDireita();
-				if(recursivo.getEsquerda() != null) { // caso o nÛ interno tenha um ou mais filhos a esquerda
-					Numero temporario = recursivo;
-					while(temporario.getEsquerda() != null) {
-						
-						temporario = temporario.getEsquerda();
-						Temporarios.add(temporario);
-					}
-					for(int i = Temporarios.size()-1; i>=0;i--) {
-						Numero adicionar = Temporarios.get(i);
-						FilhosDireita.add(adicionar);
-					}
-					Temporarios.clear();
-					FilhosDireita.add(recursivo);
-				}else if(recursivo.getDireita() == null) {
-					FilhosDireita.add(recursivo);
-					break;
-				}else {
-					FilhosDireita.add(recursivo);
-				}
-			}
-		}
-		for(int i = FilhosEsquerda.size()-1; i >= 0; i--) { // print dos filhos da esquerda
-			Numero printar = FilhosEsquerda.get(i);
-			System.out.printf("%d ",printar.getValor());
-		}
-		
-		for(int i = 0;i < FilhosDireita.size(); i++) { // print dos filhos da direita
-			Numero printar = FilhosDireita.get(i);
-			System.out.printf("%d ",printar.getValor());
-		}
-		System.out.println("");
-	}
+	public String PrintList(Numero root){
+        String print = "";
+        if (root.getEsquerda() != null) {
+        	print += (print.isEmpty() ? "" : ",") + PrintList(root.getEsquerda());
+        }
+        print += (print.isEmpty() ? "" : ",") + root.getValor();
+        if (root.getDireita() != null) {
+        	print += (print.isEmpty() ? "" : ",") + PrintList(root.getDireita());
+        }
+        return print;
+    }
 }
