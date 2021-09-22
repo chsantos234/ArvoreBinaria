@@ -71,7 +71,9 @@ public class Main{
 			
 			else if(input == 4) {
 				System.out.println("exibindo árvore em formato de lista:");
-				arvore.PrintList();
+				Numero raizAtual = arvore.ArvoreBinaria.get(0);
+				String lista = arvore.PrintList(raizAtual);
+				System.out.println(lista);
 			}
 			
 			else if(input == 5) {break;}
