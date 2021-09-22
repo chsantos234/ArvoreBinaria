@@ -1,6 +1,3 @@
-// Camilo Henrique Martins dos Santos
-// Jo„o Paulo Rodrigues
-// Felipe Campos Santos
 import java.util.Scanner;
 class Numero{
 	int valor;
@@ -29,13 +26,13 @@ public class Main{
 		Arvore arvore = new Arvore();
 		
 		//int[] R = {86,11,7,35,170,2,120,21,88,152,31,12,181,28,134,70,1,85,25,77,10,128,198};
-		System.out.println("Digite o valor inicial da ·rvore:");
+		System.out.println("Digite o valor inicial da √°rvore:");
 		int rootNum = sc.nextInt();
 		
 		Numero root = new Numero(rootNum);
 		arvore.ArvoreBinaria.add(root);
 		
-		System.out.println("[1]add elemento,[2]remover elemento,[3]retornar um elemento,[4]exibir ·rvore em-ordem,[5]sair.");
+		System.out.println("[1]add elemento,[2]remover elemento,[3]retornar um elemento,[4]exibir √°rvore em-ordem,[5]sair.");
 		while(true) {
 			int input = sc.nextInt();
 			
@@ -46,7 +43,7 @@ public class Main{
 				if(verdade) {
 					System.out.println("O valor "+add+" foi adicionado");
 				}else {
-					System.out.println("O valor "+add+" j· existe na ·rvore");
+					System.out.println("O valor "+add+" j√° existe na √°rvore");
 				}
 			}
 			
@@ -55,13 +52,13 @@ public class Main{
 				int remove = sc.nextInt();
 				Numero raizAtual = arvore.ArvoreBinaria.get(0);
 				if(arvore.ArvoreBinaria.size() == 1 && raizAtual.getValor() == remove) {
-					System.out.println("Adicione um novo valor a ·rvore antes de deletar sua raiz");
+					System.out.println("Adicione um novo valor a √°rvore antes de deletar sua raiz");
 				}else {
 					boolean verdade = arvore.RemoveElement(remove);
 					if(verdade == true) {
 						System.out.println("Elemento deletado com sucesso");
 					}else {
-						System.out.println("O elemento a ser deletado n„o existe");
+						System.out.println("O elemento a ser deletado n√£o existe");
 					}
 				}
 			}
@@ -73,14 +70,14 @@ public class Main{
 			}
 			
 			else if(input == 4) {
-				System.out.println("exibindo ·rvore em formato de lista:");
+				System.out.println("exibindo √°rvore em formato de lista:");
 				arvore.PrintList();
 			}
 			
 			else if(input == 5) {break;}
 			
 			else {
-				System.out.println("Comando inv·lido.");
+				System.out.println("Comando inv√°lido.");
 			}
 		}sc.close();
 	}
